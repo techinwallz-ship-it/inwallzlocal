@@ -1,0 +1,327 @@
+-- MySQL dump 10.13  Distrib 8.0.45, for Linux (x86_64)
+--
+-- Host: localhost    Database: pi2
+-- ------------------------------------------------------
+-- Server version	8.0.45
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `admins`
+--
+
+DROP TABLE IF EXISTS `admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admins` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admins`
+--
+
+LOCK TABLES `admins` WRITE;
+/*!40000 ALTER TABLE `admins` DISABLE KEYS */;
+INSERT INTO `admins` VALUES (1,'admin','$2b$10$HiMlnjgzumMAAA5uzHo36O7L.xvuJ48WqARIG01JF8DTtQRyxxIjq','2026-02-02 17:12:14');
+/*!40000 ALTER TABLE `admins` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `assets`
+--
+
+DROP TABLE IF EXISTS `assets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assets` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `resolved_local_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_type` enum('image','video') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_local` tinyint(1) DEFAULT '1',
+  `file_size` bigint DEFAULT NULL,
+  `uploaded_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assets`
+--
+
+LOCK TABLES `assets` WRITE;
+/*!40000 ALTER TABLE `assets` DISABLE KEYS */;
+INSERT INTO `assets` VALUES (1,1,'MENU (3840 x 2160 px).mp4','/uploads/1770052633227.mp4',NULL,'video',1,79630163,'2026-02-02 17:17:37','2026-02-02 17:17:37'),(3,1,'MENU (3840 x 2160 px).png','/uploads/1770058416529.png',NULL,'image',1,6137307,'2026-02-02 18:54:30','2026-02-02 18:54:30'),(16,2,'Want to get (2).mp4','/uploads/1770114611023.mp4',NULL,'video',1,12583824,'2026-02-03 10:30:21','2026-02-03 10:30:21'),(18,1,'VEG.mp4','/uploads/1770127424920.mp4',NULL,'video',1,5142272,'2026-02-03 14:03:49','2026-02-03 14:03:49'),(19,1,'Screenshot (1).png','/uploads/1770144360206.png',NULL,'image',1,361299,'2026-02-03 18:46:00','2026-02-03 18:46:00'),(20,1,'4cf559d1-9473-4311-48f6-b068d0a61554.mp4','/uploads/1770146455639.mp4',NULL,'video',1,27498829,'2026-02-03 19:20:55','2026-02-03 19:20:55'),(22,1,'MENU (3840 x 2160 px) (1).mp4','/uploads/1770146486869.mp4',NULL,'video',1,9077107,'2026-02-03 19:21:26','2026-02-03 19:21:26'),(23,1,'MENU (3840 x 2160 px).mp4','/uploads/1770146528189.mp4',NULL,'video',1,79630163,'2026-02-03 19:22:08','2026-02-03 19:22:08'),(24,1,'VEG_20260128_125020_0000.mp4','/uploads/1770150635855.mp4',NULL,'video',1,2286796,'2026-02-03 20:30:35','2026-02-03 20:30:35'),(25,1,'IMG_4641.mov','/uploads/1770150870440.mov',NULL,'video',1,8005755,'2026-02-03 20:34:30','2026-02-03 20:34:30'),(26,1,'IMG_4350.jpeg','/uploads/1770150873843.jpeg',NULL,'image',1,1704132,'2026-02-03 20:34:33','2026-02-03 20:34:33'),(27,1,'ABNH8035.JPEG','/uploads/1770177153157.JPEG',NULL,'image',1,5149441,'2026-02-04 03:52:33','2026-02-04 03:52:33'),(28,1,'image.jpg','/uploads/1770255167186.jpg',NULL,'image',1,1242248,'2026-02-05 01:32:47','2026-02-05 01:32:47'),(31,4,'VEG_20260206_131043_0000.mp4','/uploads/1770363721195.mp4',NULL,'video',1,2342276,'2026-02-06 07:42:01','2026-02-06 07:42:01'),(33,1,'VEG (1).png','/uploads/1770556816547.png',NULL,'image',1,13407432,'2026-02-08 13:20:16','2026-02-08 13:20:16'),(34,1,'Gemini_Generated_Image_nokc0xnokc0xnokc.png','/uploads/1770556816970.png',NULL,'image',1,2078893,'2026-02-08 13:20:16','2026-02-08 13:20:16'),(35,1,'20251015_112136.jpg','/uploads/1770556817343.jpg',NULL,'image',1,2627016,'2026-02-08 13:20:17','2026-02-08 13:20:17'),(36,1,'IMG_7469.jpeg','/uploads/1770556817728.jpeg',NULL,'image',1,2887388,'2026-02-08 13:20:17','2026-02-08 13:20:17'),(37,1,'download (24).jpeg','/uploads/1770556818030.jpeg',NULL,'image',1,55022,'2026-02-08 13:20:18','2026-02-08 13:20:18'),(38,1,'Gemini_Generated_Image_hsrb6xhsrb6xhsrb.png','/uploads/1770556818360.png',NULL,'image',1,1210698,'2026-02-08 13:20:18','2026-02-08 13:20:18'),(39,5,'4cf559d1-9473-4311-48f6-b068d0a61554.mp4','/uploads/1770630383613.mp4',NULL,'video',1,27498829,'2026-02-09 09:46:23','2026-02-09 09:46:23'),(40,4,'chinese.mp4','/uploads/1770646738293.mp4',NULL,'video',1,19070151,'2026-02-09 14:18:58','2026-02-09 14:18:58'),(41,4,'ragi.mp4','/uploads/1770646754092.mp4',NULL,'video',1,19312840,'2026-02-09 14:19:14','2026-02-09 14:19:14'),(42,4,'adai.mp4','/uploads/1770646764247.mp4',NULL,'video',1,16786795,'2026-02-09 14:19:24','2026-02-09 14:19:24'),(44,4,'tiffin.mp4','/uploads/1770646793969.mp4',NULL,'video',1,16341059,'2026-02-09 14:19:54','2026-02-09 14:19:54'),(50,4,'VEG_20260210_115138_0000.mp4','/uploads/1770704773198.mp4',NULL,'video',1,5199576,'2026-02-10 06:26:13','2026-02-10 06:26:13'),(51,4,'7_20260212_130036_0006.png','/uploads/1770881501641.png',NULL,'image',1,8249183,'2026-02-12 07:31:41','2026-02-12 07:31:41'),(52,4,'6_20260212_130036_0005.png','/uploads/1770881505548.png',NULL,'image',1,8223438,'2026-02-12 07:31:45','2026-02-12 07:31:45'),(53,4,'5_20260212_130036_0004.png','/uploads/1770881509677.png',NULL,'image',1,8234062,'2026-02-12 07:31:49','2026-02-12 07:31:49'),(54,4,'4_20260212_130036_0003.png','/uploads/1770881513648.png',NULL,'image',1,8228096,'2026-02-12 07:31:53','2026-02-12 07:31:53'),(55,4,'3_20260212_130036_0002.png','/uploads/1770881531449.png',NULL,'image',1,7677097,'2026-02-12 07:32:11','2026-02-12 07:32:11'),(56,4,'2_20260212_130036_0001.png','/uploads/1770881538648.png',NULL,'image',1,7579388,'2026-02-12 07:32:18','2026-02-12 07:32:18'),(57,4,'1_20260212_130036_0000.png','/uploads/1770881545169.png',NULL,'image',1,7598603,'2026-02-12 07:32:25','2026-02-12 07:32:25'),(58,4,'VEG_20260212_130314_0000.png','/uploads/1770881629600.png',NULL,'image',1,12669537,'2026-02-12 07:33:49','2026-02-12 07:33:49'),(59,5,'VEG_20260212_130858_0000.png','/uploads/1770881985839.png',NULL,'image',1,1718096,'2026-02-12 07:39:45','2026-02-12 07:39:45'),(60,5,'VEG_20260212_130758_0000.mp4','/uploads/1770881986901.mp4',NULL,'video',1,889985,'2026-02-12 07:39:46','2026-02-12 07:39:46'),(61,5,'Southpay_Service_All.jpg','/uploads/1770883471024.jpg',NULL,'image',1,208632,'2026-02-12 08:04:31','2026-02-12 08:04:31'),(63,6,'f51de492-475f-4cac-93b9-288ef5dbd124.jpeg','/uploads/1771048475868.jpeg',NULL,'image',1,429468,'2026-02-14 05:54:35','2026-02-14 05:54:35'),(69,6,'Energetic Food Street Advertisement Design.png','/uploads/1771077035361.png',NULL,'image',1,6665740,'2026-02-14 13:50:35','2026-02-14 13:50:35'),(70,4,'VEG (1).mp4','/uploads/1771079333236.mp4',NULL,'video',1,22324016,'2026-02-14 14:28:53','2026-02-14 14:28:53'),(74,2,'VEG.mp4','/uploads/1771243149280.mp4',NULL,'video',1,1650655,'2026-02-16 11:59:09','2026-02-16 11:59:09'),(75,2,'VEG.png','/uploads/1771243321751.png',NULL,'image',1,5540805,'2026-02-16 12:02:01','2026-02-16 12:02:01'),(76,2,'VEG.mp4','/uploads/1771243336472.mp4',NULL,'video',1,2477738,'2026-02-16 12:02:16','2026-02-16 12:02:16'),(77,2,'IMG_4976.png','/uploads/1771245472274.png',NULL,'image',1,125576,'2026-02-16 12:37:52','2026-02-16 12:37:52'),(82,6,'c91f3e93-1a12-4a5a-a692-014d612f9b08.jpeg','/uploads/1771760612080.jpeg',NULL,'image',1,259507,'2026-02-22 11:43:32','2026-02-22 11:43:32'),(83,6,'ee1fe028-e324-45eb-9800-24ce059c3091.jpeg','/uploads/1771760614641.jpeg',NULL,'image',1,326275,'2026-02-22 11:43:34','2026-02-22 11:43:34'),(85,1,'Want to get (2).mp4','/uploads/1772040832124.mp4',NULL,'video',1,12583824,'2026-02-25 17:33:52','2026-02-25 17:33:52'),(86,1,'shop.mp4','/uploads/1772195867608.mp4',NULL,'video',1,1044311,'2026-02-27 12:37:47','2026-02-27 12:37:47'),(87,6,'0e49e03a-717c-4424-ae66-73098217509a.mov','/uploads/1772201025541.mov',NULL,'video',1,117657869,'2026-02-27 14:03:45','2026-02-27 14:03:45'),(92,1,'VEG (1).mp4','/uploads/1772288635564.mp4',NULL,'video',1,22324016,'2026-02-28 14:23:55','2026-02-28 14:23:55'),(109,5,'01.jpg','/uploads/1772366498598.jpg',NULL,'image',1,297809,'2026-03-01 12:01:38','2026-03-01 12:01:38'),(110,5,'02.jpg','/uploads/1772366498655.jpg',NULL,'image',1,218552,'2026-03-01 12:01:38','2026-03-01 12:01:38'),(111,5,'03.jpg','/uploads/1772366499020.jpg',NULL,'image',1,289885,'2026-03-01 12:01:39','2026-03-01 12:01:39'),(112,5,'04.jpg','/uploads/1772366499070.jpg',NULL,'image',1,141038,'2026-03-01 12:01:39','2026-03-01 12:01:39'),(113,5,'05.jpg','/uploads/1772366499133.jpg',NULL,'image',1,134862,'2026-03-01 12:01:39','2026-03-01 12:01:39'),(114,5,'06.jpg','/uploads/1772366499229.jpg',NULL,'image',1,169666,'2026-03-01 12:01:39','2026-03-01 12:01:39'),(115,5,'07.jpg','/uploads/1772366510685.jpg',NULL,'image',1,168462,'2026-03-01 12:01:50','2026-03-01 12:01:50'),(116,5,'08.jpg','/uploads/1772366510908.jpg',NULL,'image',1,202547,'2026-03-01 12:01:50','2026-03-01 12:01:50'),(117,5,'09.jpg','/uploads/1772366511012.jpg',NULL,'image',1,335198,'2026-03-01 12:01:51','2026-03-01 12:01:51'),(118,1,'26.png','/uploads/1772545015748.png',NULL,'image',1,5641739,'2026-03-03 13:36:55','2026-03-03 13:36:55'),(119,1,'27.png','/uploads/1772545016167.png',NULL,'image',1,6099266,'2026-03-03 13:36:56','2026-03-03 13:36:56'),(120,1,'28.png','/uploads/1772545016763.png',NULL,'image',1,5229011,'2026-03-03 13:36:56','2026-03-03 13:36:56'),(122,1,'VEG (2).mp4','/uploads/1772545663306.mp4',NULL,'video',1,5434772,'2026-03-03 13:47:43','2026-03-03 13:47:43'),(123,2,'VEG (3).mp4','/uploads/1773066762655.mp4',NULL,'video',1,19291226,'2026-03-09 14:32:42','2026-03-09 14:32:42'),(124,2,'IMG_5459.png','/uploads/1773067938524.png',NULL,'image',1,4937562,'2026-03-09 14:52:18','2026-03-09 14:52:18'),(125,1,'image.jpg','/uploads/1773071492683.jpg',NULL,'image',1,3416629,'2026-03-09 15:51:32','2026-03-09 15:51:32'),(126,8,'IMG_1323.jpeg','/uploads/1773144171827.jpeg',NULL,'image',1,169702,'2026-03-10 12:02:51','2026-03-10 12:02:51'),(132,9,'213E8619-0A58-4D3F-8598-847306E9A769.png','/uploads/1773676195434.png',NULL,'image',1,2658220,'2026-03-16 15:49:55','2026-03-16 15:49:55'),(133,9,'D352A080-60A1-45BB-BCAC-6A7BD45A9088.png','/uploads/1773676262227.png',NULL,'image',1,3921808,'2026-03-16 15:51:02','2026-03-16 15:51:02'),(134,9,'EE34F6D3-031C-43EF-B167-D650B181EBDC.png','/uploads/1773726418680.png',NULL,'image',1,2765929,'2026-03-17 05:46:58','2026-03-17 05:46:58'),(135,9,'EAE13465-0589-4916-B4D9-E50A19880706.png','/uploads/1773732468812.png',NULL,'image',1,2388059,'2026-03-17 07:27:48','2026-03-17 07:27:48'),(136,9,'41A8EFEC-8C5A-4D38-9C9A-4CB78E3C1836.png','/uploads/1773735059126.png',NULL,'image',1,3029767,'2026-03-17 08:10:59','2026-03-17 08:10:59'),(137,9,'01.jpeg','/uploads/1773762095251.jpeg',NULL,'image',1,259969,'2026-03-17 15:41:35','2026-03-17 15:41:35'),(138,9,'02.jpeg','/uploads/1773762095534.jpeg',NULL,'image',1,243129,'2026-03-17 15:41:35','2026-03-17 15:41:35'),(139,9,'03.jpeg','/uploads/1773762095982.jpeg',NULL,'image',1,281868,'2026-03-17 15:41:35','2026-03-17 15:41:35'),(140,9,'04.jpeg','/uploads/1773762096226.jpeg',NULL,'image',1,307102,'2026-03-17 15:41:36','2026-03-17 15:41:36'),(141,9,'05.jpeg','/uploads/1773762096455.jpeg',NULL,'image',1,248078,'2026-03-17 15:41:36','2026-03-17 15:41:36'),(142,1,'01.jpeg','/uploads/1773762370631.jpeg',NULL,'image',1,259969,'2026-03-17 15:46:10','2026-03-17 15:46:10'),(143,1,'02.jpeg','/uploads/1773762370942.jpeg',NULL,'image',1,243129,'2026-03-17 15:46:10','2026-03-17 15:46:10'),(144,1,'03.jpeg','/uploads/1773762371146.jpeg',NULL,'image',1,281868,'2026-03-17 15:46:11','2026-03-17 15:46:11'),(145,1,'04.jpeg','/uploads/1773762371458.jpeg',NULL,'image',1,307102,'2026-03-17 15:46:11','2026-03-17 15:46:11'),(146,1,'05.jpeg','/uploads/1773762371717.jpeg',NULL,'image',1,248078,'2026-03-17 15:46:11','2026-03-17 15:46:11'),(147,9,'F4E9A647-8013-44C9-AC57-BA20EDD20308.png','/uploads/1773833356871.png',NULL,'image',1,3164894,'2026-03-18 11:29:16','2026-03-18 11:29:16'),(148,1,'BA70D564-891A-41B2-A8CD-974A3DAC53E4.jpeg','/uploads/1773854562156.jpeg',NULL,'image',1,883367,'2026-03-18 17:22:42','2026-03-18 17:22:42'),(149,9,'2919DA70-A0DE-4391-B4B6-C48C32924EB9.png','/uploads/1773990444036.png',NULL,'image',1,2579001,'2026-03-20 07:07:24','2026-03-20 07:07:24'),(150,9,'IMG_6910.jpeg','/uploads/1774092609239.jpeg',NULL,'image',1,1310594,'2026-03-21 11:30:09','2026-03-21 11:30:09'),(151,1,'image.jpg','/uploads/1774191222174.jpg',NULL,'image',1,2068274,'2026-03-22 14:53:42','2026-03-22 14:53:42'),(152,9,'4DFE99FE-6536-4699-A322-9C367E2B8855.png','/uploads/1774417424965.png',NULL,'image',1,2391351,'2026-03-25 05:43:44','2026-03-25 05:43:44'),(167,10,'01.jpg','/uploads/1774682983571.jpg',NULL,'image',1,297809,'2026-03-28 07:29:43','2026-03-28 07:29:43'),(168,10,'02.jpg','/uploads/1774682983620.jpg',NULL,'image',1,218552,'2026-03-28 07:29:43','2026-03-28 07:29:43'),(169,10,'03.jpg','/uploads/1774682983668.jpg',NULL,'image',1,289885,'2026-03-28 07:29:43','2026-03-28 07:29:43'),(170,10,'04.jpg','/uploads/1774682983715.jpg',NULL,'image',1,141038,'2026-03-28 07:29:43','2026-03-28 07:29:43'),(171,10,'05.jpg','/uploads/1774682983759.jpg',NULL,'image',1,134862,'2026-03-28 07:29:43','2026-03-28 07:29:43'),(172,10,'06.jpg','/uploads/1774682983796.jpg',NULL,'image',1,169666,'2026-03-28 07:29:43','2026-03-28 07:29:43'),(173,10,'07.jpg','/uploads/1774683002658.jpg',NULL,'image',1,168462,'2026-03-28 07:30:02','2026-03-28 07:30:02'),(174,10,'08.jpg','/uploads/1774683002708.jpg',NULL,'image',1,202547,'2026-03-28 07:30:02','2026-03-28 07:30:02'),(175,10,'09.jpg','/uploads/1774683002772.jpg',NULL,'image',1,335198,'2026-03-28 07:30:02','2026-03-28 07:30:02'),(176,10,'1000109873.mp4','/uploads/1774683311548.mp4',NULL,'video',1,59983909,'2026-03-28 07:35:11','2026-03-28 07:35:11'),(200,11,'01.mp4','/uploads/1774693505397.mp4',NULL,'video',1,887425,'2026-03-28 10:25:05','2026-03-28 10:25:05'),(201,11,'1.png','/uploads/1774693527958.png',NULL,'image',1,10227117,'2026-03-28 10:25:27','2026-03-28 10:25:27'),(202,11,'02.mp4','/uploads/1774693536905.mp4',NULL,'video',1,815329,'2026-03-28 10:25:36','2026-03-28 10:25:36'),(203,11,'2.png','/uploads/1774693544651.png',NULL,'image',1,8130992,'2026-03-28 10:25:44','2026-03-28 10:25:44'),(204,11,'03.mp4','/uploads/1774693553159.mp4',NULL,'video',1,871967,'2026-03-28 10:25:53','2026-03-28 10:25:53'),(205,11,'04.mp4','/uploads/1774693560308.mp4',NULL,'video',1,875433,'2026-03-28 10:26:00','2026-03-28 10:26:00'),(206,11,'4.png','/uploads/1774693569967.png',NULL,'image',1,14629948,'2026-03-28 10:26:10','2026-03-28 10:26:10'),(207,11,'05.mp4','/uploads/1774693586138.mp4',NULL,'video',1,869722,'2026-03-28 10:26:26','2026-03-28 10:26:26'),(208,11,'06.mp4','/uploads/1774693593071.mp4',NULL,'video',1,874077,'2026-03-28 10:26:33','2026-03-28 10:26:33'),(209,11,'ICE CREAM FOR YOUR SOUL (1).mp4','/uploads/1774693602828.mp4',NULL,'video',1,16024790,'2026-03-28 10:26:42','2026-03-28 10:26:42'),(210,11,'3.png','/uploads/1774693733094.png',NULL,'image',1,8215219,'2026-03-28 10:28:53','2026-03-28 10:28:53'),(211,2,'lingam.jpeg','/uploads/1774693778875.jpeg',NULL,'image',1,414636,'2026-03-28 10:29:38','2026-03-28 10:29:38'),(212,9,'E05002F6-869F-494E-8672-57B3CEB1C12A.png','/uploads/1775216919198.png',NULL,'image',1,3060541,'2026-04-03 11:48:39','2026-04-03 11:48:39'),(213,9,'A48A0526-BD25-476E-B5E7-453C98DB0C1F.png','/uploads/1775216927641.png',NULL,'image',1,2783108,'2026-04-03 11:48:47','2026-04-03 11:48:47'),(214,9,'64E1FBFD-72CC-42EF-9E3C-54286CCAFCDA.png','/uploads/1775216939034.png',NULL,'image',1,3301527,'2026-04-03 11:48:59','2026-04-03 11:48:59'),(216,9,'0C5270B2-1594-4AA3-8EEC-2A86C14E500A.png','/uploads/1775315446286.png',NULL,'image',1,2184847,'2026-04-04 15:10:46','2026-04-04 15:10:46'),(217,1,'01.jpg','/uploads/1775885209385.jpg',NULL,'image',1,297809,'2026-04-11 05:26:49','2026-04-11 05:26:49'),(218,1,'02.jpg','/uploads/1775885209435.jpg',NULL,'image',1,218552,'2026-04-11 05:26:49','2026-04-11 05:26:49'),(219,1,'03.jpg','/uploads/1775885209498.jpg',NULL,'image',1,289885,'2026-04-11 05:26:49','2026-04-11 05:26:49'),(220,1,'04.jpg','/uploads/1775885209548.jpg',NULL,'image',1,141038,'2026-04-11 05:26:49','2026-04-11 05:26:49'),(221,1,'05.jpg','/uploads/1775885209594.jpg',NULL,'image',1,134862,'2026-04-11 05:26:49','2026-04-11 05:26:49'),(222,1,'06.jpg','/uploads/1775885209642.jpg',NULL,'image',1,169666,'2026-04-11 05:26:49','2026-04-11 05:26:49'),(223,1,'IMG_1546.jpeg','/uploads/1775888838602.jpeg',NULL,'image',1,4408685,'2026-04-11 06:27:18','2026-04-11 06:27:18'),(225,1,'e0fe8149-5457-4fa7-a625-27953737f484.mov','/uploads/1775889990817.mov',NULL,'video',1,64829539,'2026-04-11 06:46:31','2026-04-11 06:46:31'),(226,1,'01.mp4','/uploads/1775894106122.mp4',NULL,'video',1,30182808,'2026-04-11 07:55:06','2026-04-11 07:55:06'),(228,1,'02.png','/uploads/1775895266818.png',NULL,'image',1,10459871,'2026-04-11 08:14:26','2026-04-11 08:14:26'),(230,14,'02.png','/uploads/1775895566759.png',NULL,'image',1,10459871,'2026-04-11 08:19:26','2026-04-11 08:19:26'),(231,14,'03.mp4','/uploads/1775898015744.mp4',NULL,'video',1,8010079,'2026-04-11 09:00:15','2026-04-11 09:00:15'),(232,14,'04.mp4','/uploads/1775898016559.mp4',NULL,'video',1,6258903,'2026-04-11 09:00:16','2026-04-11 09:00:16'),(233,14,'05.mp4','/uploads/1775898017187.mp4',NULL,'video',1,6112241,'2026-04-11 09:00:17','2026-04-11 09:00:17'),(234,14,'06.mp4','/uploads/1775898017642.mp4',NULL,'video',1,6498397,'2026-04-11 09:00:17','2026-04-11 09:00:17'),(235,14,'01.mp4','/uploads/1775899149942.mp4',NULL,'video',1,16678748,'2026-04-11 09:19:10','2026-04-11 09:19:10'),(237,9,'D191E6E4-A4B5-4B0D-B786-60734E016F53.png','/uploads/1776068946326.png',NULL,'image',1,3072987,'2026-04-13 08:29:06','2026-04-13 08:29:06'),(239,9,'8A4227C8-0522-4DB3-ACDC-0CE74272B3DE.png','/uploads/1776129770091.png',NULL,'image',1,2062677,'2026-04-14 01:22:50','2026-04-14 01:22:50'),(240,14,'07.jpeg','/uploads/1776139440863.jpeg',NULL,'image',1,573868,'2026-04-14 04:04:00','2026-04-14 04:04:00'),(241,14,'08.jpeg','/uploads/1776139440985.jpeg',NULL,'image',1,650364,'2026-04-14 04:04:00','2026-04-14 04:04:00'),(242,14,'09.jpeg','/uploads/1776139441089.jpeg',NULL,'image',1,504046,'2026-04-14 04:04:01','2026-04-14 04:04:01'),(243,14,'10.jpeg','/uploads/1776139441132.jpeg',NULL,'image',1,547441,'2026-04-14 04:04:01','2026-04-14 04:04:01'),(244,14,'11.jpeg','/uploads/1776139441224.jpeg',NULL,'image',1,553204,'2026-04-14 04:04:01','2026-04-14 04:04:01'),(247,9,'1261265B-FC85-4BBC-871D-23645A83D535.png','/uploads/1776323747602.png',NULL,'image',1,3189423,'2026-04-16 07:15:47','2026-04-16 07:15:47'),(248,11,'277be4b0-963a-4c4c-b0e7-a3d613000aa0.jpeg','/uploads/1776441450446.jpeg',NULL,'image',1,287691,'2026-04-17 15:57:30','2026-04-17 15:57:30'),(249,14,'14.jpeg','/uploads/1776483182524.jpeg',NULL,'image',1,185447,'2026-04-18 03:33:02','2026-04-18 03:33:02'),(250,14,'15.jpeg','/uploads/1776483182620.jpeg',NULL,'image',1,272204,'2026-04-18 03:33:02','2026-04-18 03:33:02'),(251,14,'16.jpeg','/uploads/1776483182695.jpeg',NULL,'image',1,410440,'2026-04-18 03:33:02','2026-04-18 03:33:02'),(252,14,'17.jpeg','/uploads/1776483182754.jpeg',NULL,'image',1,294833,'2026-04-18 03:33:02','2026-04-18 03:33:02'),(253,14,'18.jpeg','/uploads/1776483182817.jpeg',NULL,'image',1,238484,'2026-04-18 03:33:02','2026-04-18 03:33:02'),(254,14,'19.jpeg','/uploads/1776483182877.jpeg',NULL,'image',1,187901,'2026-04-18 03:33:02','2026-04-18 03:33:02'),(255,14,'20.jpeg','/uploads/1776483197548.jpeg',NULL,'image',1,297415,'2026-04-18 03:33:17','2026-04-18 03:33:17'),(256,14,'21.jpeg','/uploads/1776483197641.jpeg',NULL,'image',1,275141,'2026-04-18 03:33:17','2026-04-18 03:33:17'),(257,14,'22.jpeg','/uploads/1776483197753.jpeg',NULL,'image',1,261469,'2026-04-18 03:33:17','2026-04-18 03:33:17'),(258,14,'23.mp4','/uploads/1776520343660.mp4',NULL,'video',1,9052206,'2026-04-18 13:52:23','2026-04-18 13:52:23'),(260,9,'A1A5FA2A-9FE9-4675-A049-BC8727CB9A8F.png','/uploads/1776835677651.png',NULL,'image',1,2425462,'2026-04-22 05:27:57','2026-04-22 05:27:57'),(261,9,'D6544AE0-8A35-42ED-B1D3-2760603AB9F6.png','/uploads/1776835679470.png',NULL,'image',1,2235321,'2026-04-22 05:27:59','2026-04-22 05:27:59'),(262,2,'Screenshot 2026-03-13 at 9.40.47â¯PM.png','/uploads/1776852190450.png',NULL,'image',1,3363776,'2026-04-22 10:03:10','2026-04-22 10:03:10'),(277,14,'01.jpeg','/uploads/1777981529687.jpeg',NULL,'image',1,515790,'2026-05-05 11:45:29','2026-05-05 11:45:29'),(278,14,'02.jpeg','/uploads/1777981529799.jpeg',NULL,'image',1,249331,'2026-05-05 11:45:29','2026-05-05 11:45:29'),(279,14,'03.jpeg','/uploads/1777981530183.jpeg',NULL,'image',1,232012,'2026-05-05 11:45:30','2026-05-05 11:45:30'),(280,14,'04.jpeg','/uploads/1777981530615.jpeg',NULL,'image',1,321819,'2026-05-05 11:45:30','2026-05-05 11:45:30'),(281,14,'05.jpeg','/uploads/1777981531127.jpeg',NULL,'image',1,226426,'2026-05-05 11:45:31','2026-05-05 11:45:31'),(282,14,'06.jpeg','/uploads/1777981531847.jpeg',NULL,'image',1,204524,'2026-05-05 11:45:31','2026-05-05 11:45:31'),(283,14,'001.jpeg','/uploads/1777981636857.jpeg',NULL,'image',1,223464,'2026-05-05 11:47:16','2026-05-05 11:47:16'),(284,14,'002.jpeg','/uploads/1777981636975.jpeg',NULL,'image',1,215207,'2026-05-05 11:47:16','2026-05-05 11:47:16'),(285,14,'003.jpeg','/uploads/1777981637519.jpeg',NULL,'image',1,251911,'2026-05-05 11:47:17','2026-05-05 11:47:17'),(286,14,'004.jpeg','/uploads/1777981638034.jpeg',NULL,'image',1,247881,'2026-05-05 11:47:18','2026-05-05 11:47:18'),(287,14,'005.jpeg','/uploads/1777981638655.jpeg',NULL,'image',1,271187,'2026-05-05 11:47:18','2026-05-05 11:47:18'),(288,14,'006.jpeg','/uploads/1777981639471.jpeg',NULL,'image',1,270553,'2026-05-05 11:47:19','2026-05-05 11:47:19'),(289,11,'20.mp4','/uploads/1778083598581.mp4',NULL,'video',1,6117296,'2026-05-06 16:06:38','2026-05-06 16:06:38'),(290,11,'21.mp4','/uploads/1778083598993.mp4',NULL,'video',1,6386410,'2026-05-06 16:06:39','2026-05-06 16:06:39'),(291,11,'22.mp4','/uploads/1778083599495.mp4',NULL,'video',1,7066659,'2026-05-06 16:06:39','2026-05-06 16:06:39'),(292,11,'23.mp4','/uploads/1778083599694.mp4',NULL,'video',1,1231749,'2026-05-06 16:06:39','2026-05-06 16:06:39'),(293,11,'24.mp4','/uploads/1778083599902.mp4',NULL,'video',1,1750462,'2026-05-06 16:06:39','2026-05-06 16:06:39'),(295,7,'IMG_1108.jpeg','/uploads/1778675951777.jpeg',NULL,'image',1,38159,'2026-05-13 12:39:11','2026-05-13 12:39:11'),(296,7,'3d01d000-4d56-41af-b571-8ab67b332eb4.mov','/uploads/1778676085549.mov',NULL,'video',1,3255855,'2026-05-13 12:41:25','2026-05-13 12:41:25'),(297,7,'03 ORTHODONTIA.mp4','/uploads/1778678748422.mp4',NULL,'video',1,64028949,'2026-05-13 13:25:48','2026-05-13 13:25:48'),(298,7,'1000172212.mp4','/uploads/1778681532674.mp4',NULL,'video',1,38302658,'2026-05-13 14:12:12','2026-05-13 14:12:12'),(299,7,'10 ROOT CANAL TREATMENT_1.mp4','/uploads/1778687699902.mp4',NULL,'video',1,20887762,'2026-05-13 15:54:59','2026-05-13 15:54:59'),(300,7,'1000160752.mp4','/uploads/1778920164979.mp4',NULL,'video',1,53398198,'2026-05-16 08:29:25','2026-05-16 08:29:25');
+/*!40000 ALTER TABLE `assets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `display_group_players`
+--
+
+DROP TABLE IF EXISTS `display_group_players`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `display_group_players` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `group_id` int NOT NULL,
+  `display_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`),
+  KEY `display_id` (`display_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `display_group_players`
+--
+
+LOCK TABLES `display_group_players` WRITE;
+/*!40000 ALTER TABLE `display_group_players` DISABLE KEYS */;
+INSERT INTO `display_group_players` VALUES (11,5,76),(12,5,73),(18,6,62),(19,6,66);
+/*!40000 ALTER TABLE `display_group_players` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `display_groups`
+--
+
+DROP TABLE IF EXISTS `display_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `display_groups` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `display_groups`
+--
+
+LOCK TABLES `display_groups` WRITE;
+/*!40000 ALTER TABLE `display_groups` DISABLE KEYS */;
+INSERT INTO `display_groups` VALUES (5,'Abc',1,'2026-03-14 15:38:29'),(6,'scs',2,'2026-03-22 16:25:49');
+/*!40000 ALTER TABLE `display_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `displays`
+--
+
+DROP TABLE IF EXISTS `displays`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `displays` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pairing_code` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_paired` tinyint(1) DEFAULT '0',
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `location` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timezone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `group_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `current_playlist_id` int DEFAULT NULL,
+  `last_seen` datetime DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pairing_code` (`pairing_code`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `displays`
+--
+
+LOCK TABLES `displays` WRITE;
+/*!40000 ALTER TABLE `displays` DISABLE KEYS */;
+INSERT INTO `displays` VALUES (54,'E08151',1,'Thayur Food Street','Kelambakkam','Asia/Calcutta',NULL,6,23,'2026-05-20 13:10:58','2026-02-28 08:40:27'),(68,'71B02E',1,'Doctor','Tambaram','Asia/Calcutta',NULL,7,45,'2026-05-19 20:55:24','2026-03-10 11:59:10'),(70,'077E3D',1,'Anandhi','Mambakkam','Asia/Calcutta',NULL,4,13,'2026-05-02 22:29:29','2026-03-10 13:02:57'),(77,'7BCD45',1,'Lingam Stores','Tambaram','Asia/Calcutta',NULL,9,30,'2026-05-20 13:10:51','2026-03-16 13:28:19'),(81,'9FEEAA',1,'Creamy En Creamy','Kora food street (Anna nagar)','Asia/Calcutta',NULL,11,33,'2026-05-19 22:47:52','2026-03-26 07:19:20'),(88,'800966',1,'PranavHospital','Mudichur','Asia/Calcutta',NULL,14,39,'2026-05-20 13:10:57','2026-04-04 14:15:55'),(89,'A7FBA4',1,'Dibs (Kora Food Street)','Anna nagar','Asia/Calcutta',NULL,11,42,'2026-05-20 02:40:40','2026-04-17 15:56:13'),(91,'B56F11',1,'test','test','Asia/Calcutta',NULL,1,3,'2026-04-29 15:36:57','2026-04-20 16:33:55'),(102,'AD3101',1,'2gb','Tbm','Asia/Calcutta',NULL,1,1,'2026-05-17 22:32:04','2026-05-14 16:28:57');
+/*!40000 ALTER TABLE `displays` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `media`
+--
+
+DROP TABLE IF EXISTS `media`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `media` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_type` enum('image','video') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uploaded_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `media`
+--
+
+LOCK TABLES `media` WRITE;
+/*!40000 ALTER TABLE `media` DISABLE KEYS */;
+/*!40000 ALTER TABLE `media` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `playlist_assets`
+--
+
+DROP TABLE IF EXISTS `playlist_assets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `playlist_assets` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `playlist_id` int NOT NULL,
+  `asset_id` int NOT NULL,
+  `duration` int DEFAULT '10',
+  `sort_order` int DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `playlist_id` (`playlist_id`),
+  KEY `asset_id` (`asset_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=741 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `playlist_assets`
+--
+
+LOCK TABLES `playlist_assets` WRITE;
+/*!40000 ALTER TABLE `playlist_assets` DISABLE KEYS */;
+INSERT INTO `playlist_assets` VALUES (123,11,41,16,NULL),(124,11,40,16,NULL),(131,12,44,16,NULL),(134,13,50,16,NULL),(146,10,60,5,NULL),(147,7,58,10,NULL),(148,11,54,10,NULL),(149,11,53,10,NULL),(150,11,52,10,NULL),(151,11,51,10,NULL),(162,10,59,10,NULL),(192,11,70,10,0),(208,1,36,10,1),(223,1,38,10,0),(224,1,37,10,2),(225,1,35,10,3),(226,1,34,10,4),(227,1,33,10,5),(228,1,28,10,6),(229,1,27,10,7),(230,1,26,10,8),(231,1,25,4,9),(232,1,24,10,11),(234,1,20,5,12),(235,1,19,10,13),(236,1,23,15,14),(239,19,79,6,NULL),(241,20,79,6,NULL),(247,12,56,10,NULL),(268,15,83,10,NULL),(269,15,82,10,NULL),(270,15,69,10,NULL),(284,2,77,10,1),(302,23,83,15,NULL),(303,23,82,15,NULL),(304,23,69,15,NULL),(305,23,63,15,NULL),(311,23,87,10,0),(320,4,18,5,NULL),(325,4,23,15,NULL),(326,4,1,15,NULL),(327,4,3,10,NULL),(328,4,33,10,NULL),(330,5,92,16,0),(332,12,57,10,NULL),(354,26,117,20,NULL),(355,26,109,20,NULL),(357,26,111,20,NULL),(358,26,112,20,NULL),(359,26,113,20,NULL),(360,26,115,20,NULL),(361,26,116,20,NULL),(362,26,114,20,NULL),(363,26,110,20,NULL),(367,27,120,10,2),(368,27,119,10,3),(369,27,118,10,0),(370,27,122,5,NULL),(371,2,75,10,2),(388,28,124,10,0),(389,28,75,10,1),(391,29,126,10,NULL),(411,24,146,10,NULL),(412,24,145,10,NULL),(413,24,144,10,NULL),(414,24,143,10,NULL),(415,24,142,10,NULL),(417,5,120,10,1),(418,5,122,5,2),(440,6,151,10,NULL),(452,5,18,5,3),(453,5,33,10,NULL),(473,18,79,6,NULL),(478,18,155,10,0),(489,31,166,10,0),(490,31,159,6,NULL),(491,31,158,6,NULL),(492,31,157,6,NULL),(493,31,156,6,NULL),(494,31,155,6,NULL),(495,32,175,10,NULL),(496,32,174,10,NULL),(497,32,173,10,NULL),(498,32,172,10,NULL),(499,32,171,10,NULL),(500,32,170,10,NULL),(501,32,169,10,NULL),(502,32,168,10,NULL),(503,32,167,10,NULL),(528,33,209,6,1),(529,33,206,15,4),(530,33,208,6,3),(531,33,203,15,6),(532,33,207,6,5),(533,33,201,15,0),(534,33,205,6,7),(535,33,204,6,8),(536,33,202,5,9),(537,33,200,6,10),(538,33,210,15,2),(541,16,124,10,NULL),(542,16,77,10,NULL),(553,34,215,10,NULL),(557,35,217,10,NULL),(558,35,222,10,NULL),(559,35,221,10,NULL),(560,35,220,10,NULL),(561,35,219,10,NULL),(562,35,218,10,NULL),(563,35,24,10,0),(569,9,223,10,NULL),(573,38,227,63,NULL),(576,39,229,63,NULL),(626,42,248,10,NULL),(636,39,235,61,19),(637,39,253,15,18),(638,39,233,46,17),(639,39,242,15,16),(640,39,231,71,15),(641,39,241,15,14),(642,39,240,15,13),(643,39,234,60,12),(644,39,251,15,11),(645,39,252,15,1),(646,39,254,15,10),(647,39,232,53,9),(648,39,243,15,8),(649,39,249,15,7),(650,39,257,15,6),(651,39,255,15,5),(652,39,250,15,4),(653,39,244,15,3),(654,39,256,15,2),(655,39,258,70,0),(665,14,262,10,1),(666,14,211,10,0),(667,17,262,10,NULL),(668,30,237,5,NULL),(676,3,228,10,NULL),(677,3,222,10,NULL),(678,43,269,10,NULL),(679,43,268,10,NULL),(680,43,267,10,NULL),(681,43,266,10,NULL),(682,43,265,10,NULL),(683,43,264,10,NULL),(684,43,263,10,NULL),(685,44,269,10,0),(686,44,268,10,0),(687,44,267,10,0),(688,44,266,10,0),(689,44,265,10,0),(690,44,264,10,0),(691,44,263,10,0),(692,44,276,10,0),(693,44,275,10,0),(694,44,274,10,0),(695,44,273,10,0),(696,44,272,10,0),(697,44,271,10,0),(698,44,270,10,0),(699,44,282,10,NULL),(700,44,281,10,NULL),(701,44,280,10,NULL),(702,44,279,10,NULL),(703,44,278,10,NULL),(704,44,277,10,NULL),(705,44,288,10,NULL),(706,44,287,10,NULL),(707,44,286,10,NULL),(708,44,285,10,NULL),(709,44,284,10,NULL),(710,44,283,10,NULL),(711,39,288,15,NULL),(712,39,287,15,NULL),(713,39,230,15,NULL),(714,39,277,15,NULL),(715,39,278,15,NULL),(716,39,279,15,NULL),(717,39,280,15,NULL),(718,39,281,15,NULL),(719,39,282,12,NULL),(720,39,283,15,NULL),(721,39,285,15,NULL),(722,39,286,15,NULL),(723,39,284,15,NULL),(724,42,293,5,NULL),(725,42,292,5,NULL),(726,42,291,5,NULL),(727,42,290,5,NULL),(728,42,289,5,NULL),(737,45,297,810,NULL),(738,45,299,371,NULL),(739,45,298,200,NULL),(740,1,228,10,10);
+/*!40000 ALTER TABLE `playlist_assets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `playlists`
+--
+
+DROP TABLE IF EXISTS `playlists`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `playlists` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `ticker_config` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `layout` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'landscape',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `playlists`
+--
+
+LOCK TABLES `playlists` WRITE;
+/*!40000 ALTER TABLE `playlists` DISABLE KEYS */;
+INSERT INTO `playlists` VALUES (1,'arun',1,'{\"enabled\":false,\"direction\":\"left\",\"speed\":\"medium\",\"height\":40,\"fontSize\":20,\"color\":\"#00ff66\",\"bgColor\":\"rgba(0,0,0,0.85)\",\"messages\":[\"hello\"],\"place\":\"landscape\"}','landscape'),(3,'arun1',1,NULL,'landscape'),(4,'Abc',1,'{\"enabled\":false,\"direction\":\"left\",\"speed\":\"medium\",\"height\":40,\"fontSize\":20,\"color\":\"#00ff66\",\"bgColor\":\"rgba(0,0,0,0.85)\",\"messages\":[\"Hello everyone\"],\"place\":\"landscape\"}','landscape'),(5,'anadhi',1,NULL,'landscape'),(6,'abishek',1,'{\"enabled\":false,\"direction\":\"left\",\"speed\":\"medium\",\"height\":40,\"fontSize\":20,\"color\":\"#00ff66\",\"bgColor\":\"rgba(0,0,0,0.85)\",\"messages\":[\"hello\"],\"place\":\"landscape\"}','landscape'),(7,'Anandhi',4,NULL,'landscape'),(8,'Demo',4,NULL,'landscape'),(9,'testing1',1,NULL,'landscape'),(10,'drishya',5,NULL,'landscape'),(11,'play_night',4,NULL,'landscape'),(12,'play_morning',4,NULL,'landscape'),(13,'play_afternoon',4,NULL,'landscape'),(14,'Ahah',2,NULL,'landscape'),(16,'Cream',2,NULL,'landscape'),(17,'Dibs',2,NULL,'landscape'),(23,'Food street ',6,NULL,'landscape'),(24,'market',1,NULL,'landscape'),(26,'clinic',5,NULL,'landscape'),(27,'Tast e travel',1,NULL,'landscape'),(28,'Fsah',2,NULL,'landscape'),(29,'Ajee',8,NULL,'landscape'),(30,'Lingam stores',9,NULL,'landscape'),(32,'Clinic',10,NULL,'landscape'),(33,'Creamy En Creamy',11,NULL,'landscape'),(35,'Clinic',1,NULL,'landscape'),(37,'Hos',1,NULL,'landscape'),(39,'Pranav',14,NULL,'landscape'),(42,'DIPS',11,NULL,'landscape'),(44,'test',14,NULL,'landscape'),(45,'Hospital',7,NULL,'landscape');
+/*!40000 ALTER TABLE `playlists` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `schedules`
+--
+
+DROP TABLE IF EXISTS `schedules`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `schedules` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `target_type` enum('group','player') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `target_id` int NOT NULL,
+  `playlist_id` int NOT NULL,
+  `previous_playlist_id` int DEFAULT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `repeat_type` enum('once','daily','weekly') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'once',
+  `last_run` datetime DEFAULT NULL,
+  `active` tinyint DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `playlist_id` (`playlist_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schedules`
+--
+
+LOCK TABLES `schedules` WRITE;
+/*!40000 ALTER TABLE `schedules` DISABLE KEYS */;
+INSERT INTO `schedules` VALUES (2,2,'player',27,2,NULL,'2026-02-06 10:42:00','2026-02-06 10:43:00','once',NULL,0,'2026-02-06 05:11:22'),(3,2,'player',27,2,NULL,'2026-02-06 22:55:00','2026-02-06 22:57:00','once',NULL,0,'2026-02-06 17:25:00'),(4,1,'player',33,3,NULL,'2026-02-07 10:13:00','2026-02-07 10:15:00','once',NULL,0,'2026-02-07 04:42:18'),(11,4,'player',35,12,NULL,'2026-02-11 07:00:00','2026-02-11 12:00:00','daily',NULL,0,'2026-02-10 15:38:09'),(13,2,'player',27,2,NULL,'2026-02-12 00:13:00','2026-02-12 00:14:00','once',NULL,0,'2026-02-11 18:42:21'),(14,2,'player',27,2,NULL,'2026-02-12 19:30:00','2026-02-12 19:31:00','once',NULL,0,'2026-02-12 13:59:40'),(15,1,'player',34,3,NULL,'2026-02-12 19:58:00','2026-02-12 19:59:00','once',NULL,0,'2026-02-12 14:27:36'),(16,1,'player',34,1,NULL,'2026-02-12 20:06:00','2026-02-12 20:08:00','once',NULL,0,'2026-02-12 14:35:01'),(22,1,'player',39,4,NULL,'2026-02-13 12:03:00','2026-02-13 12:04:00','once',NULL,0,'2026-02-13 06:32:46'),(34,2,'player',27,14,NULL,'2026-02-15 14:20:00','2026-02-15 14:21:00','once',NULL,0,'2026-02-15 08:49:52'),(37,1,'player',41,3,NULL,'2026-02-15 17:15:00','2026-02-15 17:16:00','once',NULL,0,'2026-02-15 11:44:33'),(66,1,'player',41,3,NULL,'2026-02-16 21:18:00','2026-02-16 21:20:00','once',NULL,0,'2026-02-16 15:47:21'),(132,4,'player',70,12,NULL,'2026-05-21 07:00:00','2026-05-21 11:29:00','daily',NULL,1,'2026-03-10 15:04:09'),(134,4,'player',70,7,NULL,'2026-05-20 14:45:00','2026-05-20 18:29:00','daily',NULL,1,'2026-03-10 15:05:03'),(135,4,'player',70,11,NULL,'2026-05-20 18:30:00','2026-05-20 23:00:00','daily',NULL,1,'2026-03-10 15:05:28'),(138,4,'player',70,13,13,'2026-05-20 11:30:00','2026-05-20 14:44:00','daily',NULL,1,'2026-03-10 15:08:18'),(139,1,'group',4,5,NULL,'2026-03-14 13:21:00','2026-03-14 13:22:00','once',NULL,0,'2026-03-14 07:50:09'),(140,1,'group',4,5,NULL,'2026-03-14 13:24:00','2026-03-14 13:29:00','once',NULL,0,'2026-03-14 07:53:33'),(147,1,'player',68,1,NULL,'2026-05-20 23:05:00','2026-05-20 23:08:00','daily',NULL,1,'2026-04-21 17:33:50'),(152,2,'player',62,17,NULL,'2026-05-13 18:29:00','2026-05-13 18:31:00','daily',NULL,1,'2026-04-22 12:58:56');
+/*!40000 ALTER TABLE `schedules` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('admin','client') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'client',
+  `is_active` tinyint(1) DEFAULT '1',
+  `max_devices` int DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` enum('active','locked') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'active',
+  `device_limit` int DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,NULL,'arun','$2b$10$u3UWzag9r0SDGikWkbQaj.fBmsgLL3O1Fk/h8J8Kq5g4mw5uIJhfe','client',1,5,'2026-02-02 17:15:35','active',1),(2,NULL,'rahul','$2b$10$iyMEM4sfKSEV0/32AvOAR.3jMoQae2N0eFUWYRRxs1tjzPH98BCdy','client',1,5,'2026-02-02 19:58:52','active',1),(4,NULL,'anandhi','$2b$10$7gwHtM6p.nP9r3R0f5BBl.HeyBNtNoFf5BGFS6ShhSRMo3ye/jEr.','client',1,1,'2026-02-06 07:04:28','active',1),(5,NULL,'drishya','$2b$10$DT4sXagfi9CMWJB4CBukuux6SoIyYh.JQh/qMBYBpvEkbOqROFYC.','client',1,1,'2026-02-09 09:43:52','active',1),(6,NULL,'Anand','$2b$10$ICdFsoT5Qd/ZM7vhl5KPTeIAue.v6cm8/bDKBcJb9HZFU9PHjAlBy','client',1,3,'2026-02-14 05:47:29','active',1),(7,NULL,'User1 ','$2b$10$4SFFv25.p2CAa7tZ/JR0cOMPkpOY1gbNS7i2KLnlVhk2SaR96Y0H2','client',1,5,'2026-02-16 12:56:32','active',1),(8,NULL,'Ajeeth','$2b$10$qUo2MrsTGJZKi34O/cCVaOGVQZjpB46U1AtEjTuXSp5E6ZZVayJtG','client',1,5,'2026-03-10 11:56:55','active',1),(9,NULL,'Lingamstores','$2b$10$dT3auFGW78nEh4PMLZzbO.lZjtcE.RSivImyqnWp6k8DJuluJ5B56','client',1,1,'2026-03-16 12:20:16','active',1),(10,NULL,'Indrahomeopathy','$2b$10$bU0JPAM7WI0fAnR/mQwqAOIlsLqF6ZmEPAXtef1wTy60foehcSAyu','client',1,1,'2026-03-28 07:27:06','active',1),(11,NULL,'Creamyencreamy','$2b$10$1H6jgm6CpbMVi8yuCG8h8eNLXBC8ZzXW3eNq.f5YLZiPeMu.XZRJO','client',1,5,'2026-03-28 09:25:34','active',1),(12,NULL,'Pranavhospital','$2b$10$hN21Mp3Aj93xMDsQk94f1u6HIFagWI/f7XWU47Iu1zkfSlY6lDhD.','client',1,1,'2026-04-11 07:39:35','active',1),(14,NULL,'Pranavhos','$2b$10$WI8DrSNTwOmae/VABJS4euGIagdcKiNOIyVJCQZ3UXLseFNNeK1/m','client',1,2,'2026-04-11 08:18:50','active',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-05-20  7:41:00

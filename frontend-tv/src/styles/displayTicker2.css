@@ -1,0 +1,181 @@
+/* ===== DISPLAY TICKER CONTAINER ===== */
+
+
+  /* ===== MOVING TRACK ===== */
+
+
+  /* ===== TEXT STYLE ===== */
+  .display-ticker-text {
+    font-weight: 600;
+    letter-spacing: 1px;
+    transform: skewX(-12deg);
+    line-height: 1;
+    padding-top: 2px;
+  }
+
+
+
+  /* ===== SPEED VARIANTS ===== */
+
+
+  /* ===== DIRECTION ===== */
+
+  /* ===== KEYFRAMES ===== */
+
+
+  /* ===== DISPLAY TICKER CONTAINER ===== */
+  /* ================= BASE ================= */
+
+ .display-ticker {
+  position: relative;        /* 🔥 KEY FIX */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 5;                /* above media, below overlays */
+}
+
+  .display-ticker-track {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+
+    will-change: transform;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  /* ================= LANDSCAPE ================= */
+
+  .display-ticker.landscape {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .display-ticker.landscape .display-ticker-track {
+    white-space: nowrap;
+    display: inline-flex;
+    animation-name: ticker-left;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+
+  }
+
+  /* ================= PORTRAIT ================= */
+
+  
+  .display-ticker.slow .display-ticker-track {
+    animation-duration: 30s;
+  }
+
+  .display-ticker.medium .display-ticker-track {
+    animation-duration: 15s;
+  }
+
+  .display-ticker.fast .display-ticker-track {
+    animation-duration: 8s;
+  }
+
+
+
+
+  /* ================= DIRECTION ================= */
+
+  .display-ticker.landscape.right .display-ticker-track {
+    animation-name: ticker-right;
+  }
+
+  /* ================= KEYFRAMES ================= */
+
+
+
+  
+  /* ===== MOVING TRACK ===== */
+
+
+  /* ===== SPEED VARIANTS ===== */
+
+
+  /* ===== DIRECTION ===== */
+
+
+  /* ===== KEYFRAMES ===== */
+  @keyframes ticker-left {
+    from {
+      transform: translateX(100vw);   /* ✅ screen width */
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+
+  @keyframes ticker-right {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  
+
+  /* LANDSCAPE message spacing */
+  .display-ticker.landscape .ticker-item {
+    margin-right: 300px; /* same feel as portrait gap */
+  }
+
+
+  /* add to your displayTicker.css or component styles */
+  .video-wrap {
+    flex: 1;
+    display: flex;
+    align-items: stretch;   /* <- important: let video fill vertical space */
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: black;
+  }
+
+  .video-wrap video {
+    display: block;         /* remove inline gaps */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;    /* use 'cover' to fill & crop instead */
+    max-width: none;
+    max-height: none;
+  }
+
+
+  /* ===== MEDIA LAYER (ANDROID TV SAFE) ===== */
+
+.media-layer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: black;
+    overflow: hidden;
+
+}
+
+.display-video,
+.display-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  background: black;
+  display: none; /* controlled by JS */
+}
+
+.display-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.display-video {
+  outline: none;
+  pointer-events: none; /* signage safe */
+}
