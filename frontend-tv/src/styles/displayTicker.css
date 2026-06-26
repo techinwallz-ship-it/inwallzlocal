@@ -1,0 +1,281 @@
+/* displayTicker.css
+   Final update: landscape ticker no longer overlaps media.
+   - Reserves right-side space when portrait ticker present (as before).
+   - Reserves bottom space when landscape ticker present so media area is shrunk (no JS changes).
+   - Uses CSS variables with :has() when available; includes comments for fallback.
+*/
+
+/* ===== CONFIG / FALLBACK ===== */
+:root {
+  --ticker-reserve: 0px;         /* horizontal reserve for portrait (default) */
+  --ticker-default-width: 60px;  /* default portrait width */
+  --ticker-bottom-reserve: 0px;  /* bottom reserve for landscape (default) */
+  --ticker-default-height: 60px; /* default landscape height */
+}
+
+/* If browser supports :has(), set reserves dynamically when tickers exist */
+:root:has(.display-ticker.portrait) {
+  --ticker-reserve: var(--ticker-default-width);
+}
+:root:has(.display-ticker.landscape) {
+  --ticker-bottom-reserve: var(--ticker-default-height);
+}
+
+/* OPTIONAL fallbacks for older WebViews (uncomment if :has() unsupported)
+   Uncomment to always reserve space:
+   :root { --ticker-reserve: 60px; --ticker-bottom-reserve: 60px; }
+*/
+
+/* ===== DISPLAY TICKER BASE ===== */
+.display-ticker {
+  position: absolute;   /* floats above the content */
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 25;          /* above media layer */
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+/* text style */
+.display-ticker-text {
+  font-weight: 600;
+  letter-spacing: 1px;
+  transform: skewX(-12deg);
+  line-height: 1;
+  padding-top: 2px;
+  text-shadow: 0 0 6px currentColor;
+  display: inline-block;
+}
+
+/* track */
+.display-ticker-track {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* ticker item */
+.ticker-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== LANDSCAPE (BOTTOM) ===== */
+.display-ticker.landscape {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  /* use variable so CSS can update layout when ticker exists */
+  height: var(--ticker-bottom-reserve);
+  min-height: 0;
+  padding: 0 12px;
+  align-items: center;
+}
+
+/* spacing between messages in landscape */
+.display-ticker.landscape .ticker-item {
+  margin-right: 300px;
+}
+
+/* default horizontal animation (left) */
+.display-ticker.landscape .display-ticker-track {
+  animation-name: ticker-left;
+}
+
+/* landscape direction override (rightwards) */
+.display-ticker.landscape.right .display-ticker-track {
+  animation-name: ticker-right;
+}
+
+/* ===== PORTRAIT (RIGHT SIDE) ===== */
+.display-ticker.portrait {
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: var(--ticker-reserve); /* controlled by :has() or fallback */
+  min-width: 48px;
+  display: block;
+  pointer-events: auto;
+}
+
+/* portrait track uses vertical column + transform-based animation (viewport-based) */
+.display-ticker.portrait .display-ticker-track {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(-120vh);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 240px; /* spacing between items */
+  animation-name: ticker-portrait;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* rotate text so it reads horizontally when rotated on the right side */
+.display-ticker.portrait .display-ticker-text {
+  white-space: nowrap;
+  transform: rotate(-90deg) skewX(-12deg);
+  transform-origin: center;
+}
+
+/* if portrait direction should be reversed, target .portrait.right on the component */
+.display-ticker.portrait.right .display-ticker-track {
+  animation-name: ticker-portrait-reverse;
+}
+
+/* ===== SPEEDS (horizontal defaults) ===== */
+.display-ticker.slow .display-ticker-track { animation-duration: 30s; }
+.display-ticker.medium .display-ticker-track { animation-duration: 15s; }
+.display-ticker.fast .display-ticker-track { animation-duration: 8s; }
+
+/* ===== PORTRAIT SPEED ADJUSTMENTS (to match perceived horizontal speed) ===== */
+.display-ticker.portrait.slow .display-ticker-track { animation-duration: 20s; }
+.display-ticker.portrait.medium .display-ticker-track { animation-duration: 10s; }
+.display-ticker.portrait.fast .display-ticker-track { animation-duration: 6s; }
+
+/* ===== KEYFRAMES ===== */
+/* horizontal left-to-right (landscape) */
+@keyframes ticker-left {
+  from { transform: translateX(100vw); }
+  to   { transform: translateX(-100%); }
+}
+
+/* horizontal rightwards (landscape) */
+@keyframes ticker-right {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100vw); }
+}
+
+/* portrait: travel using viewport height to ensure full-screen travel */
+@keyframes ticker-portrait {
+  from { transform: translateX(-50%) translateY(-120vh); }
+  to   { transform: translateX(-50%) translateY(120vh); }
+}
+
+@keyframes ticker-portrait-reverse {
+  from { transform: translateX(-50%) translateY(120vh); }
+  to   { transform: translateX(-50%) translateY(-120vh); }
+}
+
+/* ===== MEDIA LAYER (ANDROID TV SAFE) ===== */
+.media-layer {
+  position: relative;
+  width: 100%;
+  /* reduce media height when landscape ticker exists (reserve bottom) */
+  background: black;
+  overflow: hidden;
+  z-index: 5; /* below ticker overlay */
+  box-sizing: border-box;
+}
+
+/* Video / Image are absolutely positioned and respect the right gutter
+   reserved for the portrait ticker via --ticker-reserve. Use contain to avoid cropping. */
+.display-video,
+.display-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: var(--ticker-reserve); 
+   /* reserve space on the right for portrait ticker */
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  object-fit: fill; /* ensure whole image is visible */
+  background: black;
+  display: none; /* JS toggles to 'block' when showing media */
+  z-index: 6;
+  pointer-events: none; /* signage-safe */
+  user-select: none;
+}
+
+/* ensure native video controls don't appear on some platforms */
+.display-video::-webkit-media-controls { display: none !important; }
+
+/* video appearance safety */
+.display-video {
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* optional helper: allow a wrapper that fills the remaining width (if used) */
+.video-wrap {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+.video-wrap video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  max-width: none;
+  max-height: none;
+}
+
+/* ===== NOTES =====
+ - This CSS uses :has() when available to detect presence of .display-ticker.landscape
+   and .display-ticker.portrait. If your WebView doesn't support :has(), enable the
+   fallback by uncommenting the fallback section above to always reserve the expected
+   ticker size.
+ - The DisplayPage.jsx already sets inline height for media-layer when it knows the
+   ticker height; this CSS provides a safe fallback so landscape won't overlap even
+   when the inline style isn't present or is delayed.
+*/
+
+/* ===== FORCE MEDIA LAYER TO IGNORE JS HEIGHT SHRINK ===== */
+/* ===== HARD OVERRIDE: LANDSCAPE TICKER SAFE AREA ===== */
+.media-layer {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* let media respect ticker, not container height */
+  padding-bottom: var(--ticker-bottom-reserve);
+  box-sizing: border-box;
+}
+
+/* media fills padded area, never overlaps ticker */
+.display-video,
+.display-image {
+  top: 0;
+  left: 0;
+  right: var(--ticker-reserve);
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.display-video {
+  display: block;
+}
+
+.display-video.ready {
+  display: block;
+}
+
+.display-video {
+  opacity: 0;
+  transition: opacity 120ms linear;
+}
+
+.display-video.ready {
+  opacity: 1;
+}

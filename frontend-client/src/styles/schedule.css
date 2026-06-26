@@ -1,0 +1,229 @@
+/* ================= PAGE ================= */
+.schedule-page,
+body {
+  background: #020617;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* ================= HEADINGS ================= */
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: #cbd5f5;
+}
+
+/* ================= GRID LAYOUT ================= */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  gap: 28px;
+  margin-top: 24px;
+}
+
+/* ================= CARD ================= */
+.schedule-card {
+  background: linear-gradient(
+    180deg,
+    #0f172a 0%,
+    #020617 100%
+  );
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  border: 1px solid #1e293b;
+}
+
+/* ================= TABLE ================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+thead {
+  background: transparent;
+}
+
+th {
+  padding: 14px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  border-bottom: 1px solid #1e293b;
+}
+
+td {
+  padding: 14px 10px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+}
+
+/* ❌ Remove hover highlight */
+tbody tr:hover {
+  background: transparent;
+}
+
+/* ================= STATUS ================= */
+.status-active {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.status-paused {
+  color: #facc15;
+  font-weight: 500;
+}
+
+.status-completed {
+  color: #94a3b8;
+}
+
+/* ================= BUTTONS ================= */
+button {
+  background: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s ease, border 0.15s ease;
+}
+
+button:hover {
+  background: #273449;
+  border-color: #475569;
+}
+
+/* Primary */
+button.primary {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  border: none;
+}
+
+button.primary:hover {
+  background: linear-gradient(135deg, #1d4ed8, #4338ca);
+}
+
+/* Secondary */
+button.secondary {
+  background: #334155;
+}
+
+button.secondary:hover {
+  background: #475569;
+}
+
+/* Danger */
+button.danger,
+button[style*="red"] {
+  background: linear-gradient(135deg, #7f1d1d, #991b1b);
+  border: none;
+}
+
+button.danger:hover,
+button[style*="red"]:hover {
+  background: linear-gradient(135deg, #991b1b, #b91c1c);
+}
+
+/* ================= MODAL ================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: linear-gradient(
+    180deg,
+    #0f172a 0%,
+    #020617 100%
+  );
+  padding: 22px;
+  border-radius: 18px;
+  width: 420px;
+  max-width: 95%;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+  border: 1px solid #1e293b;
+}
+
+.modal h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.modal label {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  padding: 9px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: #020617;
+  color: #e5e7eb;
+  font-size: 14px;
+}
+/* ================= SMALL INLINE PLACEHOLDER ================= */
+.no-schedule-placeholder {
+  padding: 10px 0 16px;
+  margin: 6px 0 18px;
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+  opacity: 0.85;
+}
+
+.modal input:focus,
+.modal select:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+/* ================= MODAL ACTIONS ================= */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* ================= EMPTY STATE ================= */
+.empty {
+  opacity: 0.65;
+  font-style: italic;
+  padding: 10px 0;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .schedule-grid {
+    grid-template-columns: 1fr;
+  }
+}
