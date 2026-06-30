@@ -48,7 +48,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
+app.use(passport.initialize());
 // make io available in routes
 app.use((req, res, next) => {
   req.io = io;

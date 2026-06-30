@@ -3,7 +3,7 @@ import { loginUser } from "../services/api";
 import { adminLogin } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "../styles/auth.css";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import {
   FiMonitor,
   FiTrendingUp,
@@ -84,7 +84,12 @@ navigate("/admin");
       setLoading(false);
     }
   };
-
+  const handleFacebookLogin = () => {
+  window.location.href = "http://localhost:5000/api/auth/facebook";
+};
+const handleGoogleLogin = () => {
+  window.location.href = "http://localhost:5000/api/auth/google";
+};
   return (
   <div className="login-page">
 
@@ -262,7 +267,24 @@ navigate("/admin");
         >
           {loading ? "Logging in..." : "Sign In"}
         </button>
+        <div className="social-divider">
+  <span>OR</span>
+</div>
 
+<button
+  className="facebook-btn"
+  onClick={handleFacebookLogin}
+>
+  <FaFacebook style={{ marginRight: "10px" }} />
+  Continue with Facebook
+</button>
+<button
+  className="google-btn"
+  onClick={handleGoogleLogin}
+>
+  <FaGoogle style={{ marginRight: "10px" }} />
+  Continue with Google
+</button>
       </div>
 
     </div>

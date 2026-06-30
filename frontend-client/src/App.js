@@ -6,6 +6,8 @@ import EnterCodePage from "./pages/EnterCodePage";
 import DashboardPage from "./pages/DashboardPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import SplashScreen from "./SplashScreen";
+import FacebookCallback from "./pages/FacebookCallback";
+import GoogleCallback from "./pages/GoogleCallback";
 
 import "./styles/client.css";
 
@@ -41,6 +43,8 @@ function App() {
 
         {/* Auth */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/facebook" element={<FacebookCallback />} />
+        <Route path="/login/google" element={<GoogleCallback />} />
 
         {/* App pages */}
         <Route path="/dashboard" element={<DashboardPage />} />
